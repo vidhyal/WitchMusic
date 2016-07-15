@@ -15,7 +15,7 @@ for subdir, dirs, files in os.walk(newdir):
     for file in files:
         f = tables.openFile(os.path.join(subdir,file),'r')
         feature_vector =[]
-	      track = f.root.analysis.songs.cols.track_id[0]
+	track = f.root.analysis.songs.cols.track_id[0]
         line = track
         for s in range(len(field_vector)):
             field = 'f.root.analysis.songs.cols.'+field_vector[s]+'[0]'
