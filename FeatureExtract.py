@@ -1,3 +1,5 @@
+#Copyright (c) 2016 Vidhya, Nandini
+
 import os
 import h5py
 import tables 
