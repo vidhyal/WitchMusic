@@ -21,7 +21,7 @@ def LoadData():
         feature_vector = []
         split_line = line.split(' ')
         for element in split_line[1:-1]:
-            feature_vector.append(str(element))
+            feature_vector.append(float(element))
         track_id = split_line[0]
         features[track_id] = feature_vector
     data_file.close()
