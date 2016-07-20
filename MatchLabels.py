@@ -18,7 +18,7 @@ for line in unprocessed_data:
     split_line = line.split(' ')
 
     for element in split_line[1:-1]:
-        feature_vector.append(float(element))
+        feature_vector.append(str(element))
 
     track_id = split_line[0]
     features[track_id] = feature_vector
@@ -26,7 +26,7 @@ for line in unprocessed_data:
 data_file.close()
 
 
-label_file = open(os.path.join(newdir,'labels.txt'),'r')
+label_file = open(os.path.join(newdir,'labels_1.txt'),'r')
 label_data = label_file.readlines()
 
 for line in label_data:
@@ -45,14 +45,14 @@ for key in features:
 for key in delKey:
     del features[key]
 
-fout = open(os.path.join(newdir,'out_2.txt'), 'w+')
+fout = open(os.path.join(newdir,'out2.txt'), 'w+')
 labelout = open(os.path.join(newdir,'labelout.txt'), 'w+')
 for key in features:
     line = key
     lab = key
     feature = features[key]
     for s in feature:
-        line+= " %f" %float(s)
+        line+= " %s" %str(s)
     line+="\n"
     fout.write(line)
 
@@ -64,4 +64,4 @@ for key in features:
 
 fout.close()
 labelout.close()
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+              
