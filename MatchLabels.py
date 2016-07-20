@@ -45,7 +45,7 @@ for key in features:
 for key in delKey:
     del features[key]
 
-fout = open(os.path.join(newdir,'out2.txt'), 'w+')
+fout = open(os.path.join(newdir,'out_2.txt'), 'w+')
 labelout = open(os.path.join(newdir,'labelout.txt'), 'w+')
 for key in features:
     line = key
