@@ -1,5 +1,3 @@
-#Copyright (c) 2016 Vidhya, Nandini
-
 import os
 import h5py
 import tables 
@@ -10,10 +8,10 @@ newdir = os.path.join(rootdir,'data')
 if not os.path.exists('featurefiles'):
     os.makedirs('featurefiles')
 outdir = os.path.join(rootdir,'featurefiles')
-fout = open(os.path.join(outdir,'label_1.txt'), 'w+')
+fout = open(os.path.join(outdir,'labels_1.txt'), 'w+')
 
 
-genres = ['electronica', 'hip hop','rock', 'r&b', 'pop','jazz']
+genres = ['folk', 'reggae', 'punk', 'metal', 'classical', 'electronica', 'hip hop','rock', 'r&b', 'pop','jazz']
 
 for subdir, dirs, files in os.walk(newdir):
 
