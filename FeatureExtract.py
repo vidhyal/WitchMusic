@@ -12,8 +12,7 @@ if not os.path.exists('featurefiles'):
 outdir = os.path.join(rootdir,'featurefiles')
 fout = open(os.path.join(outdir,'out_1.txt'), 'w+')
 
-field_vector = ['tempo','loudness', 'danceability', 'end_of_fade_in','key_confidence','mode_confidence']
-
+field_vector = ['tempo','loudness', 'start_of_fade_out', 'end_of_fade_in', 'key', 'key_confidence', 'mode', 'mode_confidence', 'time_signature', 'time_signature_confidence']
 
 for subdir, dirs, files in os.walk(newdir):
     #print subdir
