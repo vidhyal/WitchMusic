@@ -7,7 +7,7 @@ FIX_DEV = 0.00000001
 
 rootdir = os.getcwd()
 newdir = os.path.join(rootdir,'featurefiles')
-genres = ['Pop_Rock', 'Electronic', 'Religious', 'Reggae', 'Country', 'Latin', 'RnB', 'Comedy_Spoken','International', 'Folk', 'Blues', 'New Age', 'Easy_Listening', 'Jazz', 'Vocal', 'Rap', 'Children']
+genres = ['folk', 'reggae', 'punk', 'metal', 'classical', 'electronica', 'hip hop','rock', 'r&b', 'pop','jazz']
 
 def LoadData():
     data_file = open(os.path.join(newdir,'out_2.txt'),'r')
@@ -21,7 +21,7 @@ def LoadData():
         feature_vector = []
         split_line = line.split(' ')
         for element in split_line[1:-1]:
-            feature_vector.append(float(element))
+            feature_vector.append(str(element))
         track_id = split_line[0]
         features[track_id] = feature_vector
     data_file.close()
