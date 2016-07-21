@@ -24,7 +24,7 @@ for subdir, dirs, files in os.walk(newdir):
         for s in range(len(field_vector)):
             field = 'f.root.analysis.songs.cols.'+field_vector[s]+'[0]'
             line+= " %f" %(float(eval(field)))
-        line+="\n"
+        line+=" \n"
         fout.write(line)
         f.close()
 fout.close()
