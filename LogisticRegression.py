@@ -8,11 +8,6 @@ from numpy import loadtxt
 import sklearn
 from sklearn import linear_model
 
-#rootdir = os.getcwd()
-#os.chdir(rootdir/'featurefiles')
-genres = ['folk', 'reggae', 'punk', 'metal', 'classical', 'electronica', 'hip hop','rock', 'r&b', 'pop','jazz']
-genre_code = {'folk': 1, 'reggae': 2, 'punk': 3, 'metal': 4, 'classical': 5, 'electronica': 6, 'hip hop': 7, 'rock': 8, 'r&b': 9, 'pop': 10 , 'jazz' :11}
-
 data = loadtxt('LR_FeatureFile.txt')
 #	print data
 labels = loadtxt('LR_LabelFile.txt')
