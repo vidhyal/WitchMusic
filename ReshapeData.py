@@ -11,7 +11,7 @@ genre_code = {'folk': 1, 'reggae': 2, 'punk': 3, 'metal': 4, 'classical': 5, 'el
 
 data_file = open(os.path.join(newdir,'out_2.txt'),'r')
 data = data_file.readlines()
-FeatureFile = open(os.path.join(newdir,'LR_FeatureFile.txt'),'w+')
+FeatureFile = open(os.path.join(rootdir,'LR_FeatureFile.txt'),'w+')
 for line in data:
 	vector = '1.00' + '\t'
 	feature_vector = []
@@ -26,7 +26,7 @@ data_file.close()
 
 label_file = open(os.path.join(newdir,'labelout.txt'),'r')
 label_data = label_file.readlines()
-LabelFile = open(os.path.join(newdir,'LR_LabelFile.txt'),'w+')
+LabelFile = open(os.path.join(rootdir,'LR_LabelFile.txt'),'w+')
 for line in label_data:
 	split_line = line.split('\t')
 	raw_label = str(split_line[1:])
