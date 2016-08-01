@@ -4,43 +4,15 @@
 import os
 import numpy as np
 import operator
+from constants import *
+from BalanceData import *
 FIX_DEV = 0.00000001
 
 rootdir = os.getcwd()
 newdir = os.path.join(rootdir,'featurefiles')
-genres = ['folk', 'reggae', 'punk', 'metal', 'classical', 'electronica', 'hip hop','rock', 'r&b', 'pop','jazz']
 
-def LoadData():
-    data_file = open(os.path.join(newdir,'out_2.txt'),'r')
 
-    unprocessed_data = data_file.readlines()
 
-    labels ={}
-    features ={}
-
-    for line in unprocessed_data:
-        feature_vector = []
-        split_line = line.split(' ')
-        for element in split_line[1:-1]:
-            feature_vector.append(float(element))
-        track_id = split_line[0]
-        features[track_id] = feature_vector
-    data_file.close()
-    label_file = open(os.path.join(newdir,'labelout.txt'),'r')
-    label_data = label_file.readlines()
-
-    for line in label_data:
-        split_line = line.split('\t')
-        track_id = split_line[0]
-        #print (track_id)
-        if track_id in features:
-            labels[split_line[0]] = split_line[1].split('\n')[0]
-    label_file.close()
-    for key in features:
-        feature = features[key]
-        label = labels[key]
-       # print feature, label
-    return features, labels
 
 def writeToFile(key,feature,fp):
     fp1 = open(fp,'a')
@@ -49,45 +21,6 @@ def writeToFile(key,feature,fp):
         line+= " %f" %float(s)
     line+="\n"
     fp1.write(line)
-
-def BalanceData(features, labels):
-    
-    if not os.path.exists('train'):
-        os.makedirs('train')
-    traindir = os.path.join(rootdir,'train')
-    if not os.path.exists('test'):
-        os.makedirs('test')
-    testdir = os.path.join(rootdir,'test')
-   
-    count =0
-    testFile = open(os.path.join(testdir,'testFile'),'w+')
-    genreFeat={}
-    numList ={}
-    testFeat = {}
-    for genre in genres:
-        str1 = genre+'.txt'
-        fout = open(os.path.join(traindir,str1),'w+')        
-        delKey =[]
-        feature_list =[]
-        subcount=0
-        for key in features:
-            if labels[key] == genre:
-                delKey.append(key)
-                subcount=subcount+1
-        fout.close()
-        count = count+ subcount
-        numList[genre] = subcount/2
-        if subcount != 0:
-            for key in delKey[:subcount/2]:
-                feature_list.append(features[key])
-            genreFeat[genre] = feature_list
-            for key in delKey[subcount/2:]:
-                testFeat[key] = features[key]
-            for key in delKey:       
-                del features[key]
-
-    
-    return genreFeat, numList, count, testFeat
 
 def PrintToFile(means_0, name, filename):
   data_file = file(filename,'a')
@@ -100,7 +33,7 @@ def PrintToFile(means_0, name, filename):
 def gaussian(x, mu, sig):
     if sig==0:
         sig= FIX_DEV
-
+        #print sig
     return np.exp(-np.power(x - mu, 2.) / (2 * np.power(sig, 2.)))
 
 def getValue(feature, means, stdDev, prob):
@@ -109,34 +42,58 @@ def getValue(feature, means, stdDev, prob):
         value += np.log(gaussian(feature[s],means[s],stdDev[s]))
     return value
     
-def TestData(features, labels, means, stdDev, prob):
+def TestData(genreFeat, means, stdDev, prob):
     n = len(genres)
-
     Matrix = np.zeros(shape=(n,n)).astype('int') #(n,n)
-
-    for key1 in features:
-        val ={}
+    features, labels, keys = ConvertToArrays(genreFeat)
+    count =0
+    for key1 in range(len(features)):
+        val = {}
         for genre in genres:
             if prob[genre] != 0:
                 val[genre] = getValue(features[key1],means[genre], stdDev[genre], prob[genre])
-        jnd = genres.index(max(val.iteritems(), key=operator.itemgetter(1))[0])
+        lab = max(val.iteritems(), key=operator.itemgetter(1))[0]
+        jnd = genres.index(lab)
         ind = genres.index(labels[key1])
         Matrix[ind][jnd] += 1
+            
     print Matrix
+    print findAccuracy(Matrix)
+
+def findAccuracy(Matrix):
+    total =0
+    accurate =0
+    for i in range(len(Matrix)):
+        for j in range(len(Matrix[0])):
+            total +=1
+            if i==j:
+                accurate +=1
+    return (float(float(accurate))/total)
+            
+            
 
 def main():
     features, labels =LoadData()
-    genreFeat,countGenre, count, testFeat = BalanceData(features, labels)
+    genreFeat,countGenre, count, genreTestFeat = BalanceData(features, labels)
+    #writeProb = file("prob.txt",'w')
     mean_gn ={}
     stdDev_gn = {}
     prob ={}
     for genre in genres:
-        train_feat = np.asarray(genreFeat[genre])
+        train_feat = np.asarray(np.delete(genreFeat[genre], -1, axis=1))
+        train_feat = train_feat.astype(np.float)
+        #print train_feat
+        #input("press enter")
         mean_gn[genre] = np.mean(train_feat, axis=0)
+        #print genre, mean_gn
         stdDev_gn[genre] = np.std(train_feat, axis =0)
+        #PrintToFile(mean_gn, "means_"+genre, "Gaussian_parameters.txt")
+        #PrintToFile(stdDev_gn, "stdDev_"+genre, "Gaussian_parameters.txt")
         prob[genre]= float(countGenre[genre])/count
-        
-    TestData(testFeat, labels, mean_gn, stdDev_gn, prob)
+        #print prob
+        #writeProb.write("genre= "+ genre+"\tcount= %5f\n" %(prob))
+    #writeProb.close()
+    TestData(genreTestFeat, mean_gn, stdDev_gn, prob)
     
 
 if __name__ == "__main__":
