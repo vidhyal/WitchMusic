@@ -4,9 +4,13 @@ Copyright (c) 2016 Vidhya, Nandini
 Music Genre Classification. Implementation of various machine learning algorithms to predict the genre of a given music track.
 
 # Contributors:
-Nandini Khanwalkar                    Email: nandini2@pdx.edu
+Nandini Khanwalkar
 
-Vidhya Lakshmi Venkatarama            Email: vidhyal@pdx.edu
+Email: nandini2@pdx.edu
+
+Vidhya Lakshmi Venkatarama
+
+Email: vidhyal@pdx.edu
 
 # License
 The MIT License. See the LICENSE file for details.
