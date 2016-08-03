@@ -6,6 +6,7 @@ import os
 os.system("python FeatureExtract.py")
 os.system("python Labelling.py")
 os.system("python MatchLabels.py")
+os.system("python ReshapeData.py")
 os.system("python Gaussian_Naive_Bayes.py")
 os.system("python GaussianScikit.py")
 os.system("python LogisticRegression.py")
