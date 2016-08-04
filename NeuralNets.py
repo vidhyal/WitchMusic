@@ -49,10 +49,6 @@ fout.close()
     
 accuracy = accuracy_score(test_labels, pred)
 print confusion_matrix(test_labels, pred)
-
-print accuracy
-
-
-
-
-
+result = 'Accuracy of Neural Nets ='
+result+= '%f' %float(accuracy)
+print result
