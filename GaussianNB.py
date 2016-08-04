@@ -22,7 +22,7 @@ pred = model.predict(test_features)
 predictProb = model.predict_proba(test_features)
 train_acc = (model.score(train_features, train_labels))
 line = str(train_acc )+"\n"
-print train_acc
+#print train_acc
 fout.write(line)
 
 
@@ -38,6 +38,6 @@ fout.close()
     
 accuracy = accuracy_score(test_labels, pred)
 print confusion_matrix(test_labels, pred)
-
-print accuracy
-
+result = 'Accuracy of GaussianNB = '
+result+= '%f' %float(accuracy)
+print result
