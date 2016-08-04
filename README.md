@@ -29,17 +29,17 @@ In this project, we have implemented multiple machine learning algorithms, such 
 
 If you'd like to see how this works and check out the results, follow the instructions given below :-
 
-1. Make sure your system has all of the following software/packages required and enough disk space:-
+1. Make sure your system has all of the following software/packages required and enough disk space -
 
 	a. Python 2.7.11
 
 	b. Python packages: pytables, h5py, scipy, numpy, scikit-learn, scikit-neuralnetwork, python-matplotlib
 
-2. Extract the folder "data" from the dataset and store it in the current working directory.
+2. Extract the folder "data" from the dataset and store it in the current working directory
 
 3. Download this project, extract all the files in your current working directory
 
-4. Execute the file AutoRun.py.
+4. Execute the file AutoRun.py
 
 ##Bibliography
 
