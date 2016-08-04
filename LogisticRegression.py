@@ -26,5 +26,5 @@ error = float(np.count_nonzero(diff))
 accuracy = float((count-error)/count)
 result = 'Accuracy of Logistic Regression = '
 result+= '%f' %float(accuracy)
-print result
+print result + '\n \n'
 exit()
