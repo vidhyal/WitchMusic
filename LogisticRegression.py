@@ -24,7 +24,7 @@ print h
 diff = h-hideal
 error = float(np.count_nonzero(diff))
 accuracy = float((count-error)/count)
-result = 'Accuracy = '
+result = 'Accuracy of Logistic Regression = '
 result+= '%f' %float(accuracy)
 print result
 exit()
