@@ -13,7 +13,7 @@ outdir = os.path.join(rootdir,'featurefiles')
 fout = open(os.path.join(outdir,'labels_1.txt'), 'w+')
 
 
-genres = ['folk', 'reggae', 'punk', 'metal', 'classical', 'electronica', 'hip hop','rock', 'r&b', 'pop','jazz']
+genres = ['folk', 'reggae', 'punk', 'classical', 'electronica', 'hip hop','rock', 'r&b', 'pop','jazz']
 
 for subdir, dirs, files in os.walk(newdir):
 
