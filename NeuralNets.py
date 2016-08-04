@@ -34,7 +34,7 @@ predictProb = gs.predict_proba(test_features)
 
 train_acc = (gs.score(train_features, train_labels))
 line = str(train_acc )+"\n"
-print train_acc
+#print train_acc
 fout.write(line)
 
 
