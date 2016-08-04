@@ -7,7 +7,7 @@ import operator
 rootdir = os.getcwd()
 newdir = os.path.join(rootdir,'featurefiles')
 
-genre_code = {'folk': 1, 'reggae': 2, 'punk': 3, 'metal': 4, 'classical': 5, 'electronica': 6, 'hip hop': 7, 'rock': 8, 'r&b': 9, 'pop': 10 , 'jazz' :11}
+genre_code = {'folk': 1, 'reggae': 2, 'punk': 3, 'classical': 4, 'electronica': 5, 'hip hop': 6, 'rock': 7, 'r&b': 8, 'pop': 9 , 'jazz' :10}
 
 
 data_file = open(os.path.join(newdir,'out_2.txt'),'r')
@@ -23,7 +23,7 @@ for line in data:
 	for element in split_line[1:]:
 		vector+= '%f' %float(element) + '\t'
 	vector+= '\n'
-	if count <= 100:
+	if count < 200:
 		TestFile.write(vector)
 		count = count+1
 	else:
@@ -43,7 +43,7 @@ for line in label_data:
 	track_label = raw_label[2:-4]
 	label_code = genre_code[track_label]
 	LabelFile_line = str(label_code) + '\n'
-	if count <= 100:
+	if count < 200:
 		TestLabels.write(LabelFile_line)
 		count = count+1
 	else:
