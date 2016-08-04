@@ -65,6 +65,6 @@ for key in range(len(test_keys)):
 
 accuracy = accuracy_score(test_labels, pred)
 print confusion_matrix(test_labels, pred)
-result = 'Accuracy of Combine Method ='
+result = '\n Accuracy of Combine Method ='
 result+= '%f' %float(accuracy)
-print result
+print result + '\n \n'
