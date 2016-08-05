@@ -27,7 +27,7 @@ for line in unprocessed_data:
 data_file.close()
 
 
-label_file = open(os.path.join(newdir,'labels_1.txt'),'r')
+label_file = open(os.path.join(newdir,'label_1.txt'),'r')
 label_data = label_file.readlines()
 
 for line in label_data:
