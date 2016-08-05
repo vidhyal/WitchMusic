@@ -1,3 +1,6 @@
+#Copyright (c) 2016 Vidhya, Nandini
+#Following code is available for use under MIT license. Please see the LICENSE file for details.
+
 from sklearn import tree
 from BalanceData import *
 from sklearn.metrics import *
