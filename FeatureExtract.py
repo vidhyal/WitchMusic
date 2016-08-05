@@ -14,7 +14,7 @@ if not os.path.exists('featurefiles'):
 outdir = os.path.join(rootdir,'featurefiles')
 fout = open(os.path.join(outdir,'out_1.txt'), 'w+')
 
-field_vector = ['tempo','loudness', 'danceability', 'end_of_fade_in','key_confidence','mode_confidence']
+field_vector = ['tempo','loudness', 'danceability', 'end_of_fade_in','key','mode', 'time_signature']
 TIMBRE = True
 BEATS = False #True
 PITCHES = True
