@@ -1,6 +1,3 @@
-#Copyright (c) 2016 Vidhya, Nandini
-#Following code is available for use under MIT license. Please see the LICENSE file for details.
-
 import numpy as np
 from sklearn import svm
 from sklearn.metrics import *
@@ -8,6 +5,7 @@ from sklearn import cross_validation
 from sklearn.cross_validation import KFold
 from BalanceData import *
 import matplotlib.pyplot as plt
+from sklearn.grid_search import GridSearchCV
 
 
 cParam = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
@@ -33,7 +31,7 @@ def runkFoldCrossValidation(features, labels, model):
         model.C = cParam[k]
         model.fit(features[train], labels[train])
         score = model.score(features[test], labels[test])
-#        print (k, model.C, score)
+        print (k, model.C, score)
         scores.append(score)
     
 
@@ -72,13 +70,13 @@ def runkFoldCrossValidationModel(features, labels, model):
 		models[k].fit(features[train], labels[train])
                 #print "here"
 		score = models[k].score(features[test], labels[test])
-#		print (k, models[k].C, score)
+		print (k, models[k].C, score)
 		scores.append(score)
 	index, val = getMaxIndex(scores)
         finModels.append(models[index])
         kernel_Score.append(val)
     kernelInd, Val = getMaxIndex(kernel_Score)
-#    print kernel[kernelInd]
+    print kernel[kernelInd]
     return finModels[kernelInd], Val 
 	#return models[index], val
      
@@ -90,12 +88,12 @@ def getMaxIndex(scores):
       if maxVal < scores[c]:
           maxVal = scores[c]
           maxIndex = c
-#    print maxIndex
+    print maxIndex
     return maxIndex, maxVal
 
 
 
-rootdir = os.getcwd()
+ootdir = os.getcwd()
 if not os.path.exists('sklearnTry'):
         os.makedirs('sklearnTry')
 newdir = os.path.join(rootdir,'sklearnTry')
@@ -104,20 +102,27 @@ fout = open(os.path.join(newdir,'SVMOut.txt'),'w+')
 train_features, train_labels, test_features, test_labels, test_keys = GetData() 
 train_features, train_labels = ShuffleTrainFeatures(train_features, train_labels)
 
-model = svm.SVC(decision_function_shape ='ovr', class_weight='balanced'	)
+model1 = svm.SVC(decision_function_shape ='ovo')
 #c = runkFoldCrossValidation(train_features, train_labels, model)
-model, score = runkFoldCrossValidationModel(train_features, train_labels, model)
+#model, score = runkFoldCrossValidationModel(train_features, train_labels, model)
 #c =0.8
 #model.set_params( C = c)
+
+gs = GridSearchCV(model1, param_grid={
+    'C' :[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8,0.9],
+    'kernel':['rbf','sigmoid']
+       })
+model = gs
 model.fit(train_features, train_labels)
+print model
 pred = model.predict(test_features)
-predictProb = model.decision_function(test_features)
+predictProb = model.predict_proba(test_features)
 train_acc = (model.score(train_features, train_labels))
 
 
-line = str(score) +"\n"
-#line = str(train_acc )+"\n"
-#print train_acc
+#line = str(score) +"\n"
+line = str(train_acc )+"\n"
+print train_acc
 fout.write(line)
 
 
@@ -127,6 +132,8 @@ for key in range(len(test_keys)):
     for f in range(len(predictProb[key])):
       line +="%i:%f\t" % (f+1 , predictProb[key][f])
     line += "\n"
+    print line
+    input ("wait")
     fout.write(line)
 fout.close()
     
@@ -134,8 +141,6 @@ fout.close()
 accuracy = accuracy_score(test_labels, pred)
 print confusion_matrix(test_labels, pred)
 
-result = '\n Accuracy of Scikit SVM ='
-result+= '%f' %float(accuracy)
-print result + '\n \n'
+print accuracy
 
 

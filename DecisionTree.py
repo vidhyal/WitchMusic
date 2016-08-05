@@ -1,21 +1,19 @@
-import numpy as np
-from sklearn.naive_bayes import GaussianNB
-from sklearn.metrics import *
+from sklearn import tree
 from BalanceData import *
+from sklearn.metrics import *
 
-
-
-rootdir = os.getcwd()
+ootdir = os.getcwd()
 if not os.path.exists('sklearnTry'):
         os.makedirs('sklearnTry')
 newdir = os.path.join(rootdir,'sklearnTry')
-fout = open(os.path.join(newdir,'GaussianNBOut.txt'),'w+')
+fout = open(os.path.join(newdir,'DecisionTreeOut.txt'),'w+')
 
-train_features, train_labels, test_features, test_labels, test_keys = GetData() 
-
-model = GaussianNB()
-model.fit(train_features, train_labels)
+train_features, train_labels, test_features, test_labels, test_keys = GetData()
+model = tree.DecisionTreeClassifier()
+model = model.fit(train_features, train_labels)
 pred = model.predict(test_features)
+
+
 predictProb = model.predict_proba(test_features)
 train_acc = (model.score(train_features, train_labels))
 line = str(train_acc )+"\n"
@@ -31,11 +29,10 @@ for key in range(len(test_keys)):
     line += "\n"
     fout.write(line)
 fout.close()
-    
-    
+ 
+fout = open(os.path.join(newdir,'LogisticRegressionMat.txt'),'w+')     
 accuracy = accuracy_score(test_labels, pred)
-print confusion_matrix(test_labels, pred)
-
+confMat= confusion_matrix(test_labels, pred)
+print confMat
 print accuracy
-
 

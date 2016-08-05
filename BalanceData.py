@@ -1,18 +1,18 @@
 #Copyright (c) 2016 Vidhya, Nandini
-#Following code is available for use under MIT license. Please see the LICENSE file for details.
 
 import os
 import numpy as np
 import operator
 from constants import *
+from sklearn.preprocessing import StandardScaler
 FIX_DEV = 0.00000001
 
 rootdir = os.getcwd()
 newdir = os.path.join(rootdir,'featurefiles')
 
 
-def LoadData():
-    data_file = open(os.path.join(newdir,'out_2.txt'),'r')
+def LoadData(filename):
+    data_file = open(os.path.join(newdir,filename),'r')
 
     unprocessed_data = data_file.readlines()
 
@@ -55,7 +55,7 @@ def LoadData():
 def writeToFile(key,feature,fp):
     fp1 = open(fp,'a')
     line = key
-    for s in feature:
+    for s in feature[:-1]:
         line+= " %f" %float(s)
     line+="\n"
     fp1.write(line)
@@ -93,13 +93,13 @@ def BalanceData(features, labels):
         count = count+ subcount
         numList[genre] = subcount/2
         if subcount != 0:
-            for key in delKey[:subcount/2]:
+            for key in delKey[subcount/6:]:
                 trainFeat[key] = features[key]
                 trainFeat[key].append(key)
                 feature_list.append(trainFeat[key])
-                #writeToFile(key, features[key], os.path.join(traindir,str1))
+                writeToFile(key, features[key], os.path.join(traindir,str1))
             genreFeat[genre] = feature_list
-            for key in delKey[subcount/2:]:
+            for key in delKey[:subcount/6]:
                 testFeat[key] = features[key]
                 testFeat[key].append(key)
                 test_list.append(testFeat[key])
@@ -124,9 +124,22 @@ def ConvertToArrays(feats):
     return np.asarray(features), np.asarray(labels), np.asarray(keys)
 
 
+def NormalizeFeatures(features, means, stdDev):
+    features = features - means
+    for i in range(len(stdDev)):
+        if stdDev[i]==0:
+            stdDev[i] = 0.000001
+    features /= stdDev
+
+    return features
+
 def GetData():
-    features, labels =LoadData()
+    features, labels =LoadData('out_3.txt')
     genreFeat,countGenre, count, genreTestFeat = BalanceData(features, labels)
     train_features, train_labels, train_keys = ConvertToArrays(genreFeat)
     test_features, test_labels, test_keys = ConvertToArrays(genreTestFeat)
+    scaler = StandardScaler()
+    scaler.fit(train_features)
+    train_features= scaler.transform(train_features)
+    test_features = scaler.transform(test_features)
     return train_features, train_labels, test_features, test_labels, test_keys

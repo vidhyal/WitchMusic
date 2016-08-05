@@ -1,5 +1,4 @@
 #Copyright (c) 2016 Vidhya, Nandini
-#Following code is available for use under MIT license. Please see the LICENSE file for details.
 
 import os
 import numpy as np
@@ -10,6 +9,9 @@ FIX_DEV = 0.00000001
 
 rootdir = os.getcwd()
 newdir = os.path.join(rootdir,'featurefiles')
+
+
+
 
 def writeToFile(key,feature,fp):
     fp1 = open(fp,'a')
@@ -55,11 +57,7 @@ def TestData(genreFeat, means, stdDev, prob):
         Matrix[ind][jnd] += 1
             
     print Matrix
-    accuracy =  findAccuracy(Matrix)
-    result = '\n Accuracy of Gaussian Naive Bayes ='
-    result+= '%f' %float(accuracy)
-    print result + '\n \n'
-
+    print findAccuracy(Matrix)
 
 def findAccuracy(Matrix):
     total =0
@@ -99,5 +97,6 @@ def main():
 
 if __name__ == "__main__":
   main()
+
 
 
