@@ -23,6 +23,10 @@ MSD dataset: http://labrosa.ee.columbia.edu/millionsong/
 
 Machine Learning
 
+## Work Environment
+
+Ubuntu 16.04
+
 # About WitchMusic
 
 In this project, we have implemented multiple machine learning algorithms, such as Gaussian Naive Bayes, Logistic Reggression, Support Vector Machines and Neural Networks, to predict the genre of a given soundtrack. The dataset we used for this is The Million Song Dataset, which is a freely-available collection of audio features and metadata for a million contemporary popular music tracks. The dataset can be downloaded from http://labrosa.ee.columbia.edu/millionsong/ or by clicking [here](http://labrosa.ee.columbia.edu/millionsong/pages/getting-dataset). However, for the purpose of this project we'd be using a subset of this dataset consisting of 10,000 songs, which can also be downloaded from the above webpage or by clicking [here](http://labrosa.ee.columbia.edu/millionsong/pages/getting-dataset#subset).
