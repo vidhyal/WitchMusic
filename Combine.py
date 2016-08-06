@@ -85,5 +85,6 @@ for key in range(len(test_keys)):
 fout.close()
 accuracy = accuracy_score(test_labels, pred)
 print confusion_matrix(test_labels, pred)
-print accuracy    
-
+result = '\n Accuracy of Combine Method = '
+result+= '%f' %float(accuracy) + '\n \n'
+print result
