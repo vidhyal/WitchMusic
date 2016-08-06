@@ -119,7 +119,7 @@ model = gs
 model.fit(train_features, train_labels)
 #print model
 pred = model.predict(test_features)
-predictProb = model.predict_proba(test_features)
+predictProb = model.decision_function(test_features)
 train_acc = (model.score(train_features, train_labels))
 
 
