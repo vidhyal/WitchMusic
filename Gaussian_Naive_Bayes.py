@@ -58,7 +58,10 @@ def TestData(genreFeat, means, stdDev, prob):
         Matrix[ind][jnd] += 1
             
     print Matrix
-    print findAccuracy(Matrix)
+    accuracy = findAccuracy(Matrix)
+    result = '\n Accuracy of Gaussian_Naive_Bayes = '
+    result+= '%f' %float(accuracy) + '\n \n'
+    print result
 
 def findAccuracy(Matrix):
     total =0
