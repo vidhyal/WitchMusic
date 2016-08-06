@@ -34,7 +34,7 @@ def runkFoldCrossValidation(features, labels, model):
         model.C = cParam[k]
         model.fit(features[train], labels[train])
         score = model.score(features[test], labels[test])
-        print (k, model.C, score)
+#        print (k, model.C, score)
         scores.append(score)
     
 
@@ -73,13 +73,13 @@ def runkFoldCrossValidationModel(features, labels, model):
 		models[k].fit(features[train], labels[train])
                 #print "here"
 		score = models[k].score(features[test], labels[test])
-		print (k, models[k].C, score)
+#		print (k, models[k].C, score)
 		scores.append(score)
 	index, val = getMaxIndex(scores)
         finModels.append(models[index])
         kernel_Score.append(val)
     kernelInd, Val = getMaxIndex(kernel_Score)
-    print kernel[kernelInd]
+#    print kernel[kernelInd]
     return finModels[kernelInd], Val 
 	#return models[index], val
      
@@ -96,7 +96,7 @@ def getMaxIndex(scores):
 
 
 
-ootdir = os.getcwd()
+rootdir = os.getcwd()
 if not os.path.exists('sklearnTry'):
         os.makedirs('sklearnTry')
 newdir = os.path.join(rootdir,'sklearnTry')
@@ -117,7 +117,7 @@ gs = GridSearchCV(model1, param_grid={
        })
 model = gs
 model.fit(train_features, train_labels)
-print model
+#print model
 pred = model.predict(test_features)
 predictProb = model.predict_proba(test_features)
 train_acc = (model.score(train_features, train_labels))
@@ -125,7 +125,7 @@ train_acc = (model.score(train_features, train_labels))
 
 #line = str(score) +"\n"
 line = str(train_acc )+"\n"
-print train_acc
+#print train_acc
 fout.write(line)
 
 
@@ -135,7 +135,7 @@ for key in range(len(test_keys)):
     for f in range(len(predictProb[key])):
       line +="%i:%f\t" % (f+1 , predictProb[key][f])
     line += "\n"
-    print line
+#    print line
     input ("wait")
     fout.write(line)
 fout.close()
@@ -143,7 +143,6 @@ fout.close()
     
 accuracy = accuracy_score(test_labels, pred)
 print confusion_matrix(test_labels, pred)
-
-print accuracy
-
-
+result = '\n Accuracy of NeuralNets = '
+result+= '%f' %float(accuracy) + '\n \n'
+print result
