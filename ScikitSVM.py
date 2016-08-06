@@ -135,8 +135,6 @@ for key in range(len(test_keys)):
     for f in range(len(predictProb[key])):
       line +="%i:%f\t" % (f+1 , predictProb[key][f])
     line += "\n"
-#    print line
-    input ("wait")
     fout.write(line)
 fout.close()
     
