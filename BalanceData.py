@@ -66,7 +66,6 @@ def BalanceData(features, labels):
             if labels[key] == genre:
                 delKey.append(key)
                 subcount=subcount+1
-        fout.close()
         count = count+ subcount
         if subcount != 0:
             for key in delKey[subcount/x:]:
