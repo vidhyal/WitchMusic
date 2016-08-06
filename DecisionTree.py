@@ -5,7 +5,7 @@ from sklearn import tree
 from BalanceData import *
 from sklearn.metrics import *
 
-ootdir = os.getcwd()
+rootdir = os.getcwd()
 if not os.path.exists('sklearnTry'):
         os.makedirs('sklearnTry')
 newdir = os.path.join(rootdir,'sklearnTry')
@@ -20,7 +20,7 @@ pred = model.predict(test_features)
 predictProb = model.predict_proba(test_features)
 train_acc = (model.score(train_features, train_labels))
 line = str(train_acc )+"\n"
-print train_acc
+#print train_acc
 fout.write(line)
 
 
@@ -37,5 +37,6 @@ fout = open(os.path.join(newdir,'LogisticRegressionMat.txt'),'w+')
 accuracy = accuracy_score(test_labels, pred)
 confMat= confusion_matrix(test_labels, pred)
 print confMat
-print accuracy
-
+result = '\n Accuracy of Decision Tree  = '
+result+= '%f' %float(accuracy) + '\n \n'
+print result
