@@ -18,7 +18,7 @@ newdir = os.path.join(rootdir,'sklearnTry')
 fout = open(os.path.join(newdir,'LogisticRegressionOut.txt'),'w+')
 
 train_features, train_labels, test_features, test_labels, test_keys = GetData()
-print len(train_features)
+#print len(train_features)
 #input ("wait")
 model = sklearn.linear_model.LogisticRegression(tol=0.00001, fit_intercept=True, intercept_scaling=1, solver='newton-cg',max_iter=150000,  multi_class='ovr')
 
@@ -38,7 +38,7 @@ pred = gs.predict(test_features)
 predictProb = gs.predict_proba(test_features)
 train_acc = (gs.score(train_features, train_labels))
 line = str(train_acc )+"\n"
-print train_acc
+#print train_acc
 fout.write(line)
 
 
@@ -55,7 +55,9 @@ fout = open(os.path.join(newdir,'LogisticRegressionMat.txt'),'w+')
 accuracy = accuracy_score(test_labels, pred)
 confMat= confusion_matrix(test_labels, pred)
 print confMat
-print accuracy
+result = '\n Accuracy of Logistic Regression = '
+result+= '%f' %float(accuracy) + '\n \n'
+print result
 
 np.savetxt(fout,confMat, fmt="%5d")
 line =str(accuracy)+ "\n"
