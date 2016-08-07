@@ -38,6 +38,9 @@ fout.close()
     
 accuracy = accuracy_score(test_labels, pred)
 print confusion_matrix(test_labels, pred)
-result = '\n Accuracy of GaussianScikit ='
-result+= '%f' %float(accuracy)
-print result + '\n \n'
+result = '\n Accuracy of GaussianScikit = '
+result+= '%f' %float(accuracy) + '\n \n'
+print result
+
+
+

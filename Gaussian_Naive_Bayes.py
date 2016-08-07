@@ -11,6 +11,9 @@ FIX_DEV = 0.00000001
 rootdir = os.getcwd()
 newdir = os.path.join(rootdir,'featurefiles')
 
+
+
+
 def writeToFile(key,feature,fp):
     fp1 = open(fp,'a')
     line = key
@@ -55,11 +58,10 @@ def TestData(genreFeat, means, stdDev, prob):
         Matrix[ind][jnd] += 1
             
     print Matrix
-    accuracy =  findAccuracy(Matrix)
-    result = '\n Accuracy of Gaussian Naive Bayes ='
-    result+= '%f' %float(accuracy)
-    print result + '\n \n'
-
+    accuracy = findAccuracy(Matrix)
+    result = '\n Accuracy of Gaussian_Naive_Bayes = '
+    result+= '%f' %float(accuracy) + '\n \n'
+    print result
 
 def findAccuracy(Matrix):
     total =0
@@ -99,5 +101,6 @@ def main():
 
 if __name__ == "__main__":
   main()
+
 
 

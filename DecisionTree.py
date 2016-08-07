@@ -4,13 +4,20 @@
 #This file implements the scikit version of decision tree classification for our data set. It calls the GetData function of the BalanceData module to obtain the training features and labels and testing features, labels and keys. It then calls the fit method on the DecisionTree model (which does not take any paramaters) to fit the model to the training features and labels available. The test features are tested on the fitted model to predict the labels for test features which are later used to obtain the test accuracy and confusion matrix. This module also calls the predict_proba method of the Decision Tree model to get per track, the probability of it being in a particular class. This predicted probability per track is stored in teh file DecisionTreeOut which shall be later be used by the combine method.  
 
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> refs/remotes/origin/master
 from sklearn import tree
 from BalanceData import *
 from sklearn.metrics import *
 
+<<<<<<< HEAD
+rootdir = os.getcwd()
+=======
 
 ootdir = os.getcwd()
+>>>>>>> refs/remotes/origin/master
 if not os.path.exists('sklearnTry'):
         os.makedirs('sklearnTry')
 newdir = os.path.join(rootdir,'sklearnTry')
@@ -21,10 +28,18 @@ model = tree.DecisionTreeClassifier()
 model = model.fit(train_features, train_labels)
 pred = model.predict(test_features)
 
+<<<<<<< HEAD
+
+predictProb = model.predict_proba(test_features)
+train_acc = (model.score(train_features, train_labels))
+line = str(train_acc )+"\n"
+#print train_acc
+=======
 predictProb = model.predict_proba(test_features)
 train_acc = (model.score(train_features, train_labels))
 line = str(train_acc )+"\n"
 print train_acc
+>>>>>>> refs/remotes/origin/master
 fout.write(line)
 
 
@@ -41,4 +56,10 @@ fout = open(os.path.join(newdir,'LogisticRegressionMat.txt'),'w+')
 accuracy = accuracy_score(test_labels, pred)
 confMat= confusion_matrix(test_labels, pred)
 print confMat
+<<<<<<< HEAD
+result = '\n Accuracy of Decision Tree  = '
+result+= '%f' %float(accuracy) + '\n \n'
+print result
+=======
 print accuracy
+>>>>>>> refs/remotes/origin/master

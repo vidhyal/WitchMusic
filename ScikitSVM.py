@@ -8,6 +8,7 @@ from sklearn import cross_validation
 from sklearn.cross_validation import KFold
 from BalanceData import *
 import matplotlib.pyplot as plt
+from sklearn.grid_search import GridSearchCV
 
 
 cParam = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
@@ -90,7 +91,7 @@ def getMaxIndex(scores):
       if maxVal < scores[c]:
           maxVal = scores[c]
           maxIndex = c
-#    print maxIndex
+    print maxIndex
     return maxIndex, maxVal
 
 
@@ -104,19 +105,30 @@ fout = open(os.path.join(newdir,'SVMOut.txt'),'w+')
 train_features, train_labels, test_features, test_labels, test_keys = GetData() 
 train_features, train_labels = ShuffleTrainFeatures(train_features, train_labels)
 
+<<<<<<< HEAD
+model1 = svm.SVC(decision_function_shape ='ovo')
+=======
 model = svm.SVC(decision_function_shape ='ovr', probability=True)
+>>>>>>> refs/remotes/origin/master
 #c = runkFoldCrossValidation(train_features, train_labels, model)
-model, score = runkFoldCrossValidationModel(train_features, train_labels, model)
+#model, score = runkFoldCrossValidationModel(train_features, train_labels, model)
 #c =0.8
 #model.set_params( C = c)
+
+gs = GridSearchCV(model1, param_grid={
+    'C' :[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8,0.9],
+    'kernel':['rbf','sigmoid']
+       })
+model = gs
 model.fit(train_features, train_labels)
+#print model
 pred = model.predict(test_features)
 predictProb = model.predict_proba(test_features)
 train_acc = (model.score(train_features, train_labels))
 
 
-line = str(score) +"\n"
-#line = str(train_acc )+"\n"
+#line = str(score) +"\n"
+line = str(train_acc )+"\n"
 #print train_acc
 fout.write(line)
 
@@ -133,9 +145,6 @@ fout.close()
     
 accuracy = accuracy_score(test_labels, pred)
 print confusion_matrix(test_labels, pred)
-
-result = '\n Accuracy of Scikit SVM ='
-result+= '%f' %float(accuracy)
-print result + '\n \n'
-
-
+result = '\n Accuracy of NeuralNets = '
+result+= '%f' %float(accuracy) + '\n \n'
+print result
