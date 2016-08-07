@@ -1,5 +1,9 @@
 #Copyright (c) 2016 Vidhya, Nandini
-#Following code is available for use under MIT license. Please see the LICENSE file for details.
+
+
+
+#This file contains methods for pre-processing data. It assumes that those and only those tracks are in the feature file whose labels have been described in the labels file.
+
 
 
 #This file contains methods for pre-processing data. It assumes that those and only those tracks are in the feature file whose labels have been described in the labels file.
