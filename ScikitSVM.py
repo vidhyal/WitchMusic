@@ -105,7 +105,11 @@ fout = open(os.path.join(newdir,'SVMOut.txt'),'w+')
 train_features, train_labels, test_features, test_labels, test_keys = GetData() 
 train_features, train_labels = ShuffleTrainFeatures(train_features, train_labels)
 
+<<<<<<< HEAD
 model1 = svm.SVC(decision_function_shape ='ovo')
+=======
+model = svm.SVC(decision_function_shape ='ovr', probability=True)
+>>>>>>> refs/remotes/origin/master
 #c = runkFoldCrossValidation(train_features, train_labels, model)
 #model, score = runkFoldCrossValidationModel(train_features, train_labels, model)
 #c =0.8
@@ -119,7 +123,7 @@ model = gs
 model.fit(train_features, train_labels)
 #print model
 pred = model.predict(test_features)
-predictProb = model.decision_function(test_features)
+predictProb = model.predict_proba(test_features)
 train_acc = (model.score(train_features, train_labels))
 
 
