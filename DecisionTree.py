@@ -1,6 +1,9 @@
 #Copyright (c) 2016 Vidhya, Nandini
 #Following code is available for use under MIT license. Please see the LICENSE file for details.
 
+#This file implements the scikit version of decision tree classification for our data set. It calls the GetData function of the BalanceData module to obtain the training features and labels and testing features, labels and keys. It then calls the fit method on the DecisionTree model (which does not take any paramaters) to fit the model to the training features and labels available. The test features are tested on the fitted model to predict the labels for test features which are later used to obtain the test accuracy and confusion matrix. This module also calls the predict_proba method of the Decision Tree model to get per track, the probability of it being in a particular class. This predicted probability per track is stored in teh file DecisionTreeOut which shall be later be used by the combine method.  
+
+
 from sklearn import tree
 from BalanceData import *
 from sklearn.metrics import *
