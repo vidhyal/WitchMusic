@@ -48,10 +48,7 @@ If you'd like to check out the results, follow the instructions given below :-
 ## How it works :
 The AutoRun starts with executing the 'FeatureExtract' which opens each of the h5 files and extracts required features and saves them, corresponding to their track id, in a text file. 'Labelling' extracts the genre labels of the tracks and stores them in another file. 'MatchLabels', 'ReshapeData' and 'Feature_Selection' preprocess the data to fit the machine learning models. Afterwards the aforementioned algorithms are implemented to train the models and test them against a set of track features. The output tells the accuracy of each implemented model.
 
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/master
 ##Bibliography
 
 http://www.tagtraum.com/msd_genre_datasets.html
