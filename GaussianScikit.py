@@ -22,7 +22,8 @@ pred = model.predict(test_features)
 predictProb = model.predict_proba(test_features)
 train_acc = (model.score(train_features, train_labels))
 line = str(train_acc )+"\n"
-#print train_acc
+train = ' Training Accuracy of Gaussian Naive Bayes = ' + line
+print train
 fout.write(line)
 
 
@@ -38,7 +39,7 @@ fout.close()
     
 accuracy = accuracy_score(test_labels, pred)
 print confusion_matrix(test_labels, pred)
-result = '\n Accuracy of GaussianScikit = '
+result = '\n Testing Accuracy of Gaussian Naive bayes = '
 result+= '%f' %float(accuracy) + '\n \n'
 print result
 
