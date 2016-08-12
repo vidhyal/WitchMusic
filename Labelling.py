@@ -1,6 +1,8 @@
 #Copyright (c) 2016 Vidhya, Nandini
 #Following code is available for use under MIT license. Please see the LICENSE file for details.
 
+# This module extracts the genre of the track and writes it in a text file with respective track id
+
 import os
 import h5py
 import tables 
@@ -15,8 +17,6 @@ if not os.path.exists('featurefiles'):
 outdir = os.path.join(rootdir,'featurefiles')
 fout = open(os.path.join(outdir,'label_1.txt'), 'w+')
 
-
-#genres = ['electronica', 'hip hop','rock', 'r&b', 'pop','jazz']
 
 for subdir, dirs, files in os.walk(newdir):
 
