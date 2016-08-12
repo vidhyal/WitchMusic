@@ -57,6 +57,8 @@ http://www.ee.columbia.edu/~dliang/files/FINAL.pdf
 
 http://www.tagtraum.com/download/schreiber_msdgenre_ismir2015.pdf
 
+http://dl.acm.org/citation.cfm?id=2348480
+
 ##References
 
 http://openclassroom.stanford.edu/MainFolder/CoursePage.php?course=MachineLearning
