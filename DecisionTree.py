@@ -25,11 +25,8 @@ pred = model.predict(test_features)
 
 predictProb = model.predict_proba(test_features)
 train_acc = (model.score(train_features, train_labels))
-line = str(train_acc )+"\n"
-predictProb = model.predict_proba(test_features)
-train_acc = (model.score(train_features, train_labels))
-line = str(train_acc )+"\n"
-print train_acc
+line = ' Training Accuracy for Decision Tree = ' + str(train_acc )+"\n"
+print line
 fout.write(line)
 
 
@@ -46,7 +43,6 @@ fout = open(os.path.join(newdir,'LogisticRegressionMat.txt'),'w+')
 accuracy = accuracy_score(test_labels, pred)
 confMat= confusion_matrix(test_labels, pred)
 print confMat
-result = '\n Accuracy of Decision Tree  = '
+result = '\n Testing Accuracy of Decision Tree  = '
 result+= '%f' %float(accuracy) + '\n \n'
 print result
-print accuracy
