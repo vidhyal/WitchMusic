@@ -33,11 +33,11 @@ fout.write(line)
 
 
 for key in range(len(test_keys)):
-    line = test_keys[key]+"\t"
+    line2 = test_keys[key]+"\t"
     for f in range(len(predictProb[key])):
-      line +="%i:%f\t" % (f+1 , predictProb[key][f])
-    line += "\n"
-    fout.write(line)
+      line2 +="%i:%f\t" % (f+1 , predictProb[key][f])
+    line2 += "\n"
+    fout.write(line2)
 fout.close()
     
     
