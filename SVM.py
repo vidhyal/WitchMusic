@@ -129,7 +129,8 @@ train_acc = (model.score(train_features, train_labels))
 
 #line = str(score) +"\n"
 line = str(train_acc )+"\n"
-#print train_acc
+train = ' Training Accuracy of SVM = ' + line
+print train
 fout.write(line)
 
 
