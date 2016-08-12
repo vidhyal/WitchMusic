@@ -38,7 +38,8 @@ pred = gs.predict(test_features)
 predictProb = gs.predict_proba(test_features)
 train_acc = (gs.score(train_features, train_labels))
 line = str(train_acc )+"\n"
-#print train_acc
+train = ' Training Accuracy of Logistic Regression = ' + line
+print train
 fout.write(line)
 
 
@@ -55,7 +56,7 @@ fout = open(os.path.join(newdir,'LogisticRegressionMat.txt'),'w+')
 accuracy = accuracy_score(test_labels, pred)
 confMat= confusion_matrix(test_labels, pred)
 print confMat
-result = '\n Accuracy of Logistic Regression = '
+result = '\n Testing Accuracy of Logistic Regression = '
 result+= '%f' %float(accuracy) + '\n \n'
 print result
 
