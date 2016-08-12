@@ -1,6 +1,10 @@
 #Copyright (c) 2016 Vidhya, Nandini
 #Following code is available for use under MIT license. Please see the LICENSE file for details.
 
+
+#This module contains the code to combine the classification results from the various models used as defined by the list models. The combination is done according to the following formula.
+#The resulting genre of instance Ik is: G (Ik) = argmax_(gj)[Authority (ci) · Conf (ci, gj , Ik)] where gj is the jth genre , Authority (ci) is the authority of classfier ci and Conf(ci, gj, Ik) is the confidence with which classifier ci placed instance Ik in genre gj.
+
 from BalanceData import *
 from constants import *
 from sklearn.metrics import *
@@ -10,13 +14,9 @@ def getMaxLabel(prob):
     maxVal =0
     maxIndex =0
     for index in prob:
-        #print index
         if prob[index] >maxVal:
-            #print maxVal, prob[index]
             maxVal = prob[index]
             maxIndex = index
-            #print maxVal, maxIndex
-
     return maxIndex
 
 rootdir = os.getcwd()
@@ -32,28 +32,19 @@ for model in models:
     conf = float(fin.readline().split("\n")[0])
     unprocessed_data = fin.readlines()
     iterlines = iter(unprocessed_data)    
-    #next(iterlines)
     for line in iterlines:
         split_line = line.split('\t')
         track = split_line[0]
-       # print track
-        #input ("wait")
         prob = {}
         for element in split_line[1:-1]:
-#            print element.split(':')[0]
-#            print element.split(':')[1]
             prob[element.split(':')[0]] = float(element.split(':')[1])* conf
-            #print prob[element.split(':')[0]], element.split(':')[1], conf
-        
+
         if track in temp:
             earlyProb = temp[track]
-            #print earlyProb, track
             for i in prob:
                 earlyProb[i] += prob[i]
-                #print earlyProb[i], prob[i]
             temp[track]= earlyProb
-            #print temp[track]
-            
+
         else:
             temp[track] = prob
     fin.close()    
@@ -61,15 +52,12 @@ for model in models:
 train_features, train_labels, test_features, test_labels, test_keys = GetData()
 predict ={}
 label = {}
-#for key in range(len(test_keys)):
-#    label[test_keys[key]] = test_labels[key]
 
 for track in temp:
     labelIndex = int(getMaxLabel(temp[track])) -1
     
     predict[track] = genres[labelIndex]
-    #print track, predict[track], labelIndex
-
+    
 ootdir = os.getcwd()
 if not os.path.exists('sklearnTry'):
         os.makedirs('sklearnTry')

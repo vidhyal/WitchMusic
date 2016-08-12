@@ -18,12 +18,7 @@ rootdir = os.getcwd()
 newdir = os.path.join(rootdir,'featurefiles')
 
 
-<<<<<<< HEAD
-def LoadData(filename):
-    data_file = open(os.path.join(newdir,filename),'r')
-=======
 # This method opens the file containing the feature vector defined by the variable "featureFile", reads the feature vector into the dictionary "features" with key being the track id. It then opens the labels file (assumed to be "labelout.txt") and creates a dictionary "labels" with the track id as key. It then returns both these dictionaries.
->>>>>>> refs/remotes/origin/master
 
 def LoadData(featureFile):
     data_file = open(os.path.join(newdir,featureFile),'r')
@@ -50,21 +45,11 @@ def LoadData(featureFile):
 
     return features, labels
 
-<<<<<<< HEAD
-def writeToFile(key,feature,fp):
-    fp1 = open(fp,'a')
-    line = key
-    for s in feature[:-1]:
-        line+= " %f" %float(s)
-    line+="\n"
-    fp1.write(line)
-=======
->>>>>>> refs/remotes/origin/master
 
 
 #This method sorts data according to the genres and splits tracks of each genre into 1/x for testing and the rest for training.
-def BalanceData(features, labels):
-    x = 3
+def BalanceData(features, labels,x):
+   # x = 4
    
     count =0
     genreFeat={}
@@ -83,22 +68,12 @@ def BalanceData(features, labels):
                 subcount=subcount+1
         count = count+ subcount
         if subcount != 0:
-<<<<<<< HEAD
-            for key in delKey[subcount/6:]:
-                trainFeat[key] = features[key]
-                trainFeat[key].append(key)
-                feature_list.append(trainFeat[key])
-                writeToFile(key, features[key], os.path.join(traindir,str1))
-            genreFeat[genre] = feature_list
-            for key in delKey[:subcount/6]:
-=======
             for key in delKey[subcount/x:]:
                 trainFeat[key] = features[key]
                 trainFeat[key].append(key)
                 feature_list.append(trainFeat[key])
             genreFeat[genre] = feature_list
             for key in delKey[:subcount/x]:
->>>>>>> refs/remotes/origin/master
                 testFeat[key] = features[key]
                 testFeat[key].append(key)
                 test_list.append(testFeat[key])
@@ -122,26 +97,10 @@ def ConvertToArrays(feats):
             labels.append(genre)
     return np.asarray(features), np.asarray(labels), np.asarray(keys)
 
-<<<<<<< HEAD
-
-def NormalizeFeatures(features, means, stdDev):
-    features = features - means
-    for i in range(len(stdDev)):
-        if stdDev[i]==0:
-            stdDev[i] = 0.000001
-    features /= stdDev
-
-    return features
-
-def GetData():
-    features, labels =LoadData('out_3.txt')
-    genreFeat,countGenre, count, genreTestFeat = BalanceData(features, labels)
-=======
 # This method loads the data, splits the data into training and test sets and converts the training and test features, labels and keys into arrays. It then normalizes the training set and the test set using the training set features. Finally it returns the training fetaures and labels and the test fetaures, labels and keys (for use in combination step).
 def GetData():
     features, labels =LoadData('out_3.txt')
-    genreFeat, count, genreTestFeat = BalanceData(features, labels)
->>>>>>> refs/remotes/origin/master
+    genreFeat, count, genreTestFeat = BalanceData(features, labels,4)
     train_features, train_labels, train_keys = ConvertToArrays(genreFeat)
     test_features, test_labels, test_keys = ConvertToArrays(genreTestFeat)
     scaler = StandardScaler()
