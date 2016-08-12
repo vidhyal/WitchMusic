@@ -26,7 +26,7 @@ pred = model.predict(test_features)
 predictProb = model.predict_proba(test_features)
 train_acc = (model.score(train_features, train_labels))
 line = str(train_acc )+"\n"
-train = ' Training Accuracy of Gaussian Naive Bayes = ' + line
+train = ' Training Accuracy of Decision Tree = ' + line
 print train
 fout.write(line)
 
