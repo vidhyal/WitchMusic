@@ -3,7 +3,7 @@
 
 
 # This module contains the code to combine the classification results from the various models used as defined by the list 
-# models. The combination is done according to the formula as given in the following paper - 
+# models. The combination is done using the formula as given in the following paper - 
 # http://dl.acm.org/citation.cfm?id=2348480
 
 from BalanceData import *
