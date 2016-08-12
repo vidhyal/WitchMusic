@@ -10,7 +10,7 @@ os.system("python Feature_Selection.py")
 os.system("python GaussianScikit.py")
 os.system("python LogisticRegression.py")
 os.system("python DecisionTree.py")
-os.system("python ScikitSVM.py")
+os.system("python SVM.py")
 os.system("python NeuralNets.py")
 os.system("python Combine.py")
 
