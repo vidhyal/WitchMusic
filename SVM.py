@@ -87,7 +87,7 @@ train_features, train_labels, test_features, test_labels, test_keys = GetData()
 train_features, train_labels = ShuffleTrainFeatures(train_features, train_labels)
 
 
-model1 = svm.SVC(decision_function_shape ='ovo')
+#model1 = svm.SVC(decision_function_shape ='ovo')
 
 model = svm.SVC(decision_function_shape ='ovr', probability=True)
 
@@ -96,11 +96,11 @@ model = svm.SVC(decision_function_shape ='ovr', probability=True)
 #c =0.8
 #model.set_params( C = c)
 
-gs = GridSearchCV(model1, param_grid={
+gs = GridSearchCV(model, param_grid={
     'C' :[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8,0.9],
     'kernel':['rbf','sigmoid']
        })
-model = gs
+
 model.fit(train_features, train_labels)
 pred = model.predict(test_features)
 predictProb = model.predict_proba(test_features)
