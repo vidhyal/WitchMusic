@@ -38,7 +38,8 @@ predictProb = gs.predict_proba(test_features)
 
 train_acc = (gs.score(train_features, train_labels))
 line = str(train_acc )+"\n"
-#print train_acc
+train = ' Training Accuracy of Neural Network = ' + line
+print train
 fout.write(line)
 
 
@@ -53,7 +54,7 @@ fout.close()
     
 accuracy = accuracy_score(test_labels, pred)
 print confusion_matrix(test_labels, pred)
-result = '\n Accuracy of NeuralNets = '
+result = '\n Testing Accuracy of NeuralNets = '
 result+= '%f' %float(accuracy) + '\n \n'
 print result
 
