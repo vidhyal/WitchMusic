@@ -1,6 +1,7 @@
 #Copyright (c) 2016 Vidhya, Nandini
 #Following code is available for use under MIT license. Please see the LICENSE file for details.
 
+#This module normalizes the features extracted by the FeatureExtract module to belong within the range -1.0 to 1.0. From the all the features available, this module then selects only those features that have a variance higher than that denoted as parameter to the VarianceThreshold call and creates a feature file with these.
 from sklearn.feature_selection import *
 from BalanceData import *
 import numpy as np
@@ -22,12 +23,12 @@ features, labels = LoadData('out_2.txt')
 feature_list =[]
 label_list =[]
 for key in features:
-    #print key
+
     feature_list.append(features[key])
     label_list.append(labels[key])
-#print feature_list
+
 X, y = np.asarray(feature_list), np.asarray(label_list)
-#print X.shape, y.shape
+
 
 means = np.mean(X, axis = 0)
   
@@ -35,9 +36,7 @@ stdDev = np.std(X, axis = 0)
 X = NormalizeFeatures(X, means, stdDev)
 
 
-#print y
-#train_features, train_labels, test_features, test_labels, test_keys = GetData()
-sel = VarianceThreshold(threshold=(1.0)) #SelectKBest(chi2, k=10)    #.fit_transform(feature_list, label_list)  #VarianceThreshold(threshold=(.7 * (1 - .7)))
+sel = VarianceThreshold(threshold=(0.9)) #SelectKBest(chi2, k=10)    #.fit_transform(feature_list, label_list)  #VarianceThreshold(threshold=(.7 * (1 - .7)))
 features_aux = sel.fit_transform(X) #sel.fit_transform(X,y) #
 indices = sel.get_support(True)
 print indices
@@ -53,7 +52,7 @@ for key in features:
 
 
 fout = open(os.path.join(newdir,'out_3.txt'), 'w+')
-#labelout = open(os.path.join(newdir,'labelout.txt'), 'w+')
+
 for key in new_features:
     line = key
     #lab = key
@@ -62,12 +61,6 @@ for key in new_features:
         line+= " %f" %float(s)
     line+="\n"
     fout.write(line)
-
-    #label = labels[key]
-    #lab+= "\t" +label
-    #lab+= "\n"
-    #labelout.write(lab)
-    #print feature, label
 
 fout.close()
 
