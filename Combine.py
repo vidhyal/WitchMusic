@@ -2,8 +2,9 @@
 #Following code is available for use under MIT license. Please see the LICENSE file for details.
 
 
-#This module contains the code to combine the classification results from the various models used as defined by the list models. The combination is done according to the following formula.
-#The resulting genre of instance Ik is: G (Ik) = argmax_(gj)[Authority (ci) · Conf (ci, gj , Ik)] where gj is the jth genre , Authority (ci) is the authority of classfier ci and Conf(ci, gj, Ik) is the confidence with which classifier ci placed instance Ik in genre gj.
+# This module contains the code to combine the classification results from the various models used as defined by the list 
+# models. The combination is done according to the formula as given in the following paper - 
+# http://dl.acm.org/citation.cfm?id=2348480
 
 from BalanceData import *
 from constants import *
